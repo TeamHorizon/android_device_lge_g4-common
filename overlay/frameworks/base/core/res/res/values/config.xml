@@ -268,10 +268,10 @@
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
-    <integer name="config_deviceHardwareWakeKeys">64</integer>
+    <!--integer name="config_deviceHardwareWakeKeys">64</integer-->
 
     <!-- SD card is hot-pluggable on this device -->
-    <bool name="config_batterySdCardAccessibility">true</bool>
+    <!--bool name="config_batterySdCardAccessibility">true</bool-->
 
     <!-- Base "touch slop" value used by ViewConfiguration as a
          movement threshold where scrolling should begin. -->
