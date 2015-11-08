@@ -81,7 +81,8 @@ PRODUCT_PACKAGES += \
     init.qcom.fm.sh \
     init.class_main.sh \
     init.qcom.post_boot.sh \
-    init.qcom.uicc.sh
+    init.qcom.uicc.sh \
+    init.msm8992.sensor.sh
 
 # RIL
 PRODUCT_PACKAGES += \
@@ -206,6 +207,7 @@ PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libdashplayer \
     libdivxdrmdecrypt \
+    libextmedia_jni \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxCore \
@@ -217,6 +219,8 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libOmxVidcCommon \
     libstagefrighthw \
+    libstagefright_soft_flacdec \
+    libqcmediaplayer \
     qcmediaplayer
 
 PRODUCT_BOOT_JARS += \

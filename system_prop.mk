@@ -2,10 +2,9 @@
 # System Properties for G4
 #
 
-# MTP and USB-OTG
+# MTP
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp \
-    persist.sys.isUsbOtgEnabled=true
+    persist.sys.usb.config=mtp
 
 # Camera
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -17,6 +16,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #Audio   
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qc.sdk.audio.ssr=false \
+    persist.audio.ssr.3mic=false \
     persist.audio.fluence.voicecall=true \
     persist.audio.fluence.voicerec=false \
     persist.audio.fluence.speaker=true \
@@ -37,7 +38,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.chip.vendor=brcm \
-    ro.bt.bdaddr_path="/data/misc/bdaddr"
+    ro.bt.bdaddr_path="/data/misc/bdaddr" \
+    persist.service.avrcp.browsing=1
 
 # Display
 #
@@ -74,8 +76,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Qualcomm
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true \
-    ro.qualcomm.cabl=0 \
-    ro.vendor.extension_library=libqti-perfd-client.so
+    ro.qualcomm.cabl=2 \
+    ro.vendor.extension_library=libqti-perfd-client.so \
+    persist.dpm.feature=3 \
+    ro.frp.pst=/dev/block/platform/soc.0/f9824900.sdhci/by-name/persistent
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
