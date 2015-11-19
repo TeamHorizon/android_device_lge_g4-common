@@ -290,41 +290,44 @@ on boot
     insmod /system/lib/modules/texfat.ko
 
 # START touch_driver
-	chown system system /sys/devices/virtual/input/lge_touch/incoming_call
-	chmod 664 /sys/devices/virtual/input/lge_touch/incoming_call
-	chown system system /sys/devices/virtual/input/lge_touch/ime_status
-	chown system lgkeyguard /sys/devices/virtual/input/lge_touch/keyguard
-	chmod 664 /sys/devices/virtual/input/lge_touch/keyguard
-	chown system system /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
-	chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
-	chown system system /sys/devices/virtual/input/lge_touch/ts_noise
-	chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise
-	chown system system /sys/devices/virtual/input/lge_touch/sensing_test
-	chmod 664 /sys/devices/virtual/input/lge_touch/sensing_test
-	chown system system /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
-	chmod 664 /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
-	chown system system /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
-	chmod 664 /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
+    chown system system /sys/devices/virtual/input/lge_touch/incoming_call
+    chmod 664 /sys/devices/virtual/input/lge_touch/incoming_call
+    chown system system /sys/devices/virtual/input/lge_touch/ime_status
+    chown system lgkeyguard /sys/devices/virtual/input/lge_touch/keyguard
+    chmod 664 /sys/devices/virtual/input/lge_touch/keyguard
+    chown system system /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
+    chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise_log_enable
+    chown system system /sys/devices/virtual/input/lge_touch/ts_noise
+    chmod 664 /sys/devices/virtual/input/lge_touch/ts_noise
+    chown system system /sys/devices/virtual/input/lge_touch/sensing_test
+    chmod 664 /sys/devices/virtual/input/lge_touch/sensing_test
+    chown system system /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
+    chmod 664 /sys/devices/virtual/input/lge_touch/hidden_normal_cal_state
+    chown system system /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
+    chmod 664 /sys/devices/virtual/input/lge_touch/hidden_lpwg_cal_state
 # END touch_driver
 
 # START touch_knock_on
-	chown system system /sys/devices/virtual/input/lge_touch/lpwg_data
-	chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_data
-	chown system radio /sys/devices/virtual/input/lge_touch/lpwg_notify
-	chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_notify
-	write /sys/devices/virtual/input/lge_touch/lpwg_notify "1 1 0 0"
-	chown system system /sys/devices/virtual/input/lge_touch/lpwg_test_info
-	chmod 644 /sys/devices/virtual/input/lge_touch/lpwg_test_info
-	chown system system /sys/devices/virtual/input/lge_touch/lpwg_test_ctrl
-	chmod 644 /sys/devices/virtual/input/lge_touch/lpwg_test_ctrl
-	chown system system /sys/devices/virtual/input/lge_touch/touch_wake_up_test
-	chmod 664 /sys/devices/virtual/input/lge_touch/touch_wake_up_test
-	chown system system /sys/devices/virtual/input/lge_touch/quick_cover_status
-	chmod 664 /sys/devices/virtual/input/lge_touch/quick_cover_status
+    chown system system /sys/devices/virtual/input/lge_touch/lpwg_data
+    chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_data
+    chown system radio /sys/devices/virtual/input/lge_touch/lpwg_notify
+    chmod 664 /sys/devices/virtual/input/lge_touch/lpwg_notify
+    chown system system /sys/devices/virtual/input/lge_touch/lpwg_test_info
+    chmod 644 /sys/devices/virtual/input/lge_touch/lpwg_test_info
+    chown system system /sys/devices/virtual/input/lge_touch/lpwg_test_ctrl
+    chmod 644 /sys/devices/virtual/input/lge_touch/lpwg_test_ctrl
+    chown system system /sys/devices/virtual/input/lge_touch/touch_wake_up_test
+    chmod 664 /sys/devices/virtual/input/lge_touch/touch_wake_up_test
+    chown system system /sys/devices/virtual/input/lge_touch/quick_cover_status
+    chmod 664 /sys/devices/virtual/input/lge_touch/quick_cover_status
 # END touch_knock_on
     lge_chcon_recursive /data/property u:object_r:property_data_file:s0
     lge_chcon_recursive /data/security u:object_r:security_file:s0
     start chcon_keystore
+
+# Double tap to wake gesture
+    chown system radio /sys/devices/virtual/input/lge_touch/tap2wake
+    chmod 664 /sys/devices/virtual/input/lge_touch/tap2wake
 
     chown media media /sys/devices/soc.0/qcom,msm-pcm-routing.39/cfg_string_rx
     chown media media /sys/devices/soc.0/qcom,msm-pcm-routing.39/cfg_string_tx
@@ -423,7 +426,7 @@ on post-fs-data
 
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
-    
+
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
@@ -1033,7 +1036,7 @@ service mocana-startup /system/bin/sh /system/etc/init.mocana.sh
 service p2p_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/p2p_supplicant_overlay.conf \
-    -puse_p2p_group_interface=1 \
+    -puse_p2p_group_interface=1p2p_device=1 \
     -m/data/misc/wifi/p2p_supplicant.conf \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
     class main
@@ -1083,18 +1086,17 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-service thermal-engine /system/vendor/bin/thermal-engine
-   class main
-   user root
-   socket thermal-send-client stream 0660 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0660 system system
-   group root
+# OSS thermal management
+service thermanager /system/bin/thermanager /system/etc/thermanager.xml
+    class late_start
+    user root
+    group root
 
-service time_daemon /system/bin/time_daemon
-   class late_start
-   user root
-   group root
+service timekeep /system/bin/timekeep restore
+    class late_start
+    user root
+    group root
+    oneshot
 
 service adsprpcd /system/bin/adsprpcd
    class main
@@ -1150,6 +1152,7 @@ service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
 
 on property:init.svc.bootanim=stopped
     start usf-post-boot
+    setprop sys.io.scheduler bfq
 
 service energy-awareness /system/bin/energy-awareness
     class main
@@ -1197,8 +1200,8 @@ service hwaddrs /system/bin/hwaddrs
 on property:init.svc.hwaddrs=stopped
     chmod 644 /data/misc/wifi/config
     chown system wifi /data/misc/wifi/config
-    chmod 644 /data/misc/bdaddr
-    chown bluetooth bluetooth /data/misc/bdaddr
+    chmod 644 /data/misc/bluetooth/bdaddr
+    chown bluetooth bluetooth /data/misc/bluetooth/bdaddr
 
 on property:persist.service.criticaltemp=1
    write /sys/kernel/debug/spmi/spmi-0/address 0x00867
@@ -1244,10 +1247,3 @@ service fidodaemon /system/vendor/bin/fidodaemon
     class late_start
     user system
     group system
-
-# shared transport user space mgr service for Bluetooth, FM and GPS
-service brcm_uim_sysfs /system/bin/brcm-uim-sysfs
-    class late_start
-    user root
-    group bluetooth net_bt_admin
-    oneshot

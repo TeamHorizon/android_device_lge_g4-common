@@ -67,6 +67,7 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 41943040
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 4341104640
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 24897388544
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 
 # Recovery
 TARGET_RECOVERY_FSTAB := $(COMMON_PATH)/rootdir/etc/fstab.qcom
@@ -113,6 +114,11 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUEDROID_VENDOR_CONF := device/lge/g4-common/bluetooth/libbt_vndcfg.txt
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/g4-common/bluetooth
 
+# GPS
+TARGET_GPS_HAL_PATH := $(COMMON_PATH)/gps
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm8992
+TARGET_NO_RPC := true
+
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 COMMON_GLOBAL_CFLAGS += -DLG_CAMERA_HARDWARE
@@ -143,6 +149,7 @@ COMMON_GLOBAL_CFLAGS += \
 
 # Power
 TARGET_POWERHAL_VARIANT := qcom
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/lge_touch/tap2wake"
 
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
@@ -154,20 +161,14 @@ TARGET_PLATFORM_DEVICE_BASE := /devices/soc.0/
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy
 
-# Time services
-BOARD_USES_QC_TIME_SERVICES := true
-
 # Disable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := false
-
-# Enable keymaster app checking
-TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
 # Vendor init
 TARGET_INIT_VENDOR_LIB := libinit_msm
 
-#RIL
-TARGET_RELEASE_CPPFLAGS += -DNEEDS_LGE_RIL_SYMBOLS
+# RIL
+BOARD_RIL_CLASS := ../../../device/lge/g4-common/ril/
 
 # NFC
 BOARD_NFC_CHIPSET := pn547

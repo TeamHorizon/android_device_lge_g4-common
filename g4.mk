@@ -116,9 +116,17 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
-# Thermal configuration
+# Thermal
+PRODUCT_PACKAGES += \
+    thermanager
+
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine-8992.conf:system/etc/thermal-engine-8992.conf
+    $(LOCAL_PATH)/configs/thermanager.xml:system/etc/thermanager.xml
+
+# Sony timekeep
+PRODUCT_PACKAGES += \
+    timekeep \
+    TimeKeep
 
 # IZat configuration
 PRODUCT_COPY_FILES += \
@@ -169,9 +177,10 @@ PRODUCT_PACKAGES += \
     memtrack.msm8992 \
     liboverlay
 
-# Keymaster
+# Keystore
 PRODUCT_PACKAGES += \
-    keystore.msm8992
+    keystore.msm8992 \
+    gatekeeper.msm8992
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \

@@ -38,7 +38,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.chip.vendor=brcm \
-    ro.bt.bdaddr_path="/data/misc/bdaddr" \
+    ro.bt.bdaddr_path="/data/misc/bluetooth/bdaddr" \
     persist.service.avrcp.browsing=1
 
 # Display
@@ -78,22 +78,22 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true \
     ro.qualcomm.cabl=2 \
     ro.vendor.extension_library=libqti-perfd-client.so \
-    persist.dpm.feature=3 \
-    ro.frp.pst=/dev/block/platform/soc.0/f9824900.sdhci/by-name/persistent
+    persist.dpm.feature=3
 
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
     persist.radio.apm_sim_not_pwdn=1 \
-    persist.radio.add_power_save=1 
+    persist.radio.add_power_save=1 \
+    ro.telephony.ril_class=LgeLteRIL
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.netmgrd.qos.enable=false \
     ro.use_data_netmgrd=true
 
-# Recovery
+# Factory Reset Protection
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cwm.forbid_format=/boot,/firmware,/mpt,/persist,/persist-lg,/sns
+    ro.frp.pst=/dev/block/bootdevice/by-name/persistent
 
 # Sensor debugging
 # Valid settings (and presumably what they mean):
