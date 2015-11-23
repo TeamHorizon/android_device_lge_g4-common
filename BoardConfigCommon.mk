@@ -192,7 +192,7 @@ BOARD_USES_QC_TIME_SERVICES := true
 TARGET_HW_DISK_ENCRYPTION := false
 
 # Vendor init
-#TARGET_INIT_VENDOR_LIB := libinit_msm
+TARGET_INIT_VENDOR_LIB := libinit_msm
 
 # RIL
 BOARD_RIL_CLASS := ../../../device/lge/g4-common/ril/
